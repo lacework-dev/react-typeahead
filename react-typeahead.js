@@ -387,10 +387,24 @@ var Typeahead = React.createClass({
       length += 1;
     }
 
+    // Maintaining Focus As Hover On List Items When Navigation Keys Are Used.
+    let resultContainer = resultContainer ? resultContainer : document.getElementsByClassName(this.props.customClasses.results)[0];
+    let elemHeight = elemHeight ? elemHeight : resultContainer.getElementsByTagName('li')[0].clientHeight;
+    let scrollValue = Math.ceil(resultContainer.scrollTop);
+
+    // Positioning Focus On Cyclic Events Of Dropdown List
     if (newIndex < 0) {
       newIndex += length;
+      resultContainer.scrollTop = this.props.options.length * elemHeight;
     } else if (newIndex >= length) {
       newIndex -= length;
+      resultContainer.scrollTop = 0;
+    }
+
+    if (delta == 1) {
+      newIndex == 0 ? resultContainer.scrollTop = 0 : resultContainer.scrollTop = scrollValue + elemHeight;
+    } else {
+      newIndex == length - 1 ? resultContainer.scrollTop = newIndex * elemHeight : resultContainer.scrollTop = scrollValue - elemHeight;
     }
 
     this.setState({ selectionIndex: newIndex });
