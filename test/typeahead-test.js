@@ -8,6 +8,7 @@ var TypeaheadOption = require('../src/typeahead/option');
 var TypeaheadSelector = require('../src/typeahead/selector');
 var Keyevent = require('../src/keyevent');
 var TestUtils = require('react-addons-test-utils');
+var createReactClass = require('create-react-class');
 
 function simulateTextInput(component, value) {
   var node = component.refs.entry;
@@ -135,6 +136,27 @@ describe('Typeahead Component', function() {
         TestUtils.Simulate.keyDown(node, { keyCode: Keyevent.DOM_VK_DOWN });
         TestUtils.Simulate.keyDown(node, { keyCode: Keyevent.DOM_VK_DOWN });
         assert.equal(true, results[1].props.hover);
+      });
+    });
+
+    describe('mouse controls', function() {
+      // as of React 15.5.4 this does not work
+      xit('mouse click selects an option (click event)', function() {
+        var results = simulateTextInput(this.component, 'o');
+        var secondItem = ReactDOM.findDOMNode(results[1]);
+        var secondItemValue = secondItem.innerText;
+        var node = this.component.refs.entry;
+        TestUtils.Simulate.click(secondItem);
+        assert.equal(node.value, secondItemValue);
+      });
+      // but this one works
+      it('mouse click selects an option (mouseDown event)', function() {
+        var results = simulateTextInput(this.component, 'o');
+        var secondItem = ReactDOM.findDOMNode(results[1]);
+        var secondItemValue = secondItem.innerText;
+        var node = this.component.refs.entry;
+        TestUtils.Simulate.mouseDown(secondItem);
+        assert.equal(node.value, secondItemValue);
       });
     });
 
@@ -583,7 +605,7 @@ describe('Typeahead Component', function() {
 
     context('customListComponent', function() {
       before(function() {
-        ListComponent = React.createClass({
+        ListComponent = createReactClass({
           render: function() {
             return <div></div>;
           }

@@ -216,6 +216,12 @@ Default: false
 
 If true, options will still be rendered when there is no value.
 
+#### props.allowCustomValues
+
+Type: `boolean`
+
+If true, custom tags can be added without a matching typeahead selection
+
 ### Typeahead ([Exposed Component Functions][reactecf])
 
 #### typeahead.focus
@@ -386,6 +392,13 @@ Type: `boolean`
 Default: true
 
 If false, the default classNames are removed from the tokenizer and the typeahead.
+
+#### props.showOptionsWhenEmpty
+
+Type: `boolean`
+Default: false
+
+If true, options will still be rendered when there is no value.
 
 ### Tokenizer ([Exposed Component Functions][reactecf])
 

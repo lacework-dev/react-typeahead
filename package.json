@@ -1,6 +1,6 @@
 {
   "name": "react-typeahead",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.7",
   "description": "React-based typeahead and typeahead-tokenizer",
   "keywords": [
     "react",
@@ -38,6 +38,8 @@
     "classnames": "^1.2.0",
     "fuzzy": "^0.1.0",
     "webpack": "^2.4.1"
+    "create-react-class": "^15.5.2",
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": ">= 0.14"
